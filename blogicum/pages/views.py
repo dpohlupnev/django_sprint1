@@ -2,12 +2,12 @@ from django.shortcuts import render
 
 
 def about(request):
-    template = 'pages/about.html'
+    """Функция для информации о проекте"""
     context = {'pages': about}
-    return render(request, template, context)
+    return render(request, 'pages/about.html', context)
 
 
 def rules(request):
-    template = 'pages/rules.html'
+    """Функция для вывода правил сообщества"""
     context = {'pages': rules}
-    return render(request, template, context)
+    return render(request, 'pages/rules.html', context)

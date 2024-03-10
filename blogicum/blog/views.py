@@ -45,18 +45,18 @@ posts: list = [
 
 
 def index(request):
-    template = 'blog/index.html'
+    """Функция для вывода главной страницы"""
     context = {'posts': posts}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, pk):
-    template = 'blog/detail.html'
+    """Функция для вывода конкретного поста"""
     context = {'post': posts[pk]}
-    return render(request, template, context)
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
+    """Функция для вывода категории"""
     context = {'category': category_slug}
-    return render(request, template, context)
+    return render(request, 'blog/category.html', context)
