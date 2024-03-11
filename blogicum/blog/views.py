@@ -1,6 +1,7 @@
+from django.http import Http404, HttpResponse, HttpRequest
 from django.shortcuts import render
 
-posts: list = [
+posts_for_generate: list = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -43,6 +44,8 @@ posts: list = [
     },
 ]
 
+posts = {post['id']: post for post in posts_for_generate}
+
 
 def index(request):
     """Функция для вывода главной страницы"""
@@ -52,8 +55,12 @@ def index(request):
 
 def post_detail(request, pk):
     """Функция для вывода конкретного поста"""
-    context = {'post': posts[pk]}
-    return render(request, 'blog/detail.html', context)
+    try:
+        context = {'post': posts[pk]}
+    except KeyError:
+        raise Http404
+    else:
+        return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
