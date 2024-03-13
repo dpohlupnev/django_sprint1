@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponse, HttpRequest
 from django.shortcuts import render
 
-posts_for_generate: list = [
+posts: list = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -44,21 +44,21 @@ posts_for_generate: list = [
     },
 ]
 
-posts = {post['id']: post for post in posts_for_generate}
+posts_ids = {post['id']: post for post in posts}
 
 
 def index(request):
     """Функция для вывода главной страницы"""
-    context = {'posts': posts}
+    context = {'posts': posts_ids}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, pk):
     """Функция для вывода конкретного поста"""
     try:
-        context = {'post': posts[pk]}
+        context = {'post': posts_ids[pk]}
     except KeyError:
-        raise Http404
+        raise Http404("Такой страницы не существует")
     else:
         return render(request, 'blog/detail.html', context)
 
