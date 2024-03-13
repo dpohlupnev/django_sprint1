@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse, HttpRequest
+from django.http import Http404
 from django.shortcuts import render
 
 posts: list = [
