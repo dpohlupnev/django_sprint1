@@ -48,22 +48,22 @@ posts_ids = {post['id']: post for post in posts}
 
 
 def index(request):
-    """Функция для вывода главной страницы"""
+    """Функция для вывода главной страницы."""
     context = {'posts': posts_ids}
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, pk):
-    """Функция для вывода конкретного поста"""
+def post_detail(request, post_id):
+    """Функция для вывода конкретного поста."""
     try:
-        context = {'post': posts_ids[pk]}
+        context = {'post': posts_ids[post_id]}
     except KeyError:
-        raise Http404("Такой страницы не существует")
+        raise Http404("Такой пост не найден")
     else:
         return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    """Функция для вывода категории"""
+    """Функция для вывода категории."""
     context = {'category': category_slug}
     return render(request, 'blog/category.html', context)
